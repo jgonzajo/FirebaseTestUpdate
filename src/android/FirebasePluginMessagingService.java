@@ -86,9 +86,8 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     }*/
     //END
 
-    // BEGIN: Enable IU to handle messages targeted for IU
-    // Add the below line on 1st line of the method.
-    if (IUApp.handleFCMMessage(this, remoteMessage)) {
+    if (remoteMessage.getFrom().equals(IUApp.getFCMSenderId())) {
+      IUApp.handleFCMMessage(this, remoteMessage);
       return;
     }
 
