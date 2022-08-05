@@ -1,5 +1,6 @@
 package org.apache.cordova.firebase;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,13 +12,16 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
+//import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.app.Notification;
 import android.text.TextUtils;
 import android.content.ContentResolver;
 import android.graphics.Color;
 import android.media.AudioAttributes;
+
+import androidx.core.app.NotificationCompat;
+
 import me.leolin.shortcutbadger.ShortcutBadger;
 import amazonia.iu.com.amlibrary.client.IUApp;
 
@@ -33,8 +37,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import co.acoustic.mobile.push.sdk.api.MceSdk;
-import co.acoustic.mobile.push.sdk.api.fcm.FcmApi;
+//import co.acoustic.mobile.push.sdk.api.MceSdk;
+//import co.acoustic.mobile.push.sdk.api.fcm.FcmApi;
 
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
@@ -68,27 +72,27 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
   public void onMessageReceived(RemoteMessage remoteMessage) {
 
     Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
-    Log.e("DATA",remoteMessage.getData().toString());
-    Log.e("IsNotificationAcoustic:", String.valueOf(FcmApi.isFcmMessage(remoteMessage)));
+    Log.e("DATA", remoteMessage.getData().toString());
+    //Log.e("IsNotificationAcoustic:", String.valueOf(FcmApi.isFcmMessage(remoteMessage)));
 
 
     //Begin Acoustic Notification
-    if(FcmApi.isFcmMessage(remoteMessage)){
+    /*if(FcmApi.isFcmMessage(remoteMessage)){
       MceSdk.getNotificationsClient().getNotificationsPreference().setIcon(getApplicationContext(), (R.mipmap.ic_launcher));
       MceSdk.getNotificationsClient().getNotificationsPreference().setLargeIcon(getApplicationContext(),(R.mipmap.ic_launcher));
       MceSdk.getNotificationsClient().getNotificationsPreference().setVibrateEnabled(getApplicationContext(),true);      
       FcmApi.handleMceFcmMessage(getApplicationContext(), remoteMessage);
     
-    }
+    }*/
     //END
-    else{    
-     // BEGIN: Enable IU to handle messages targeted for IU
-     // Add the below line on 1st line of the method.
-     if (IUApp.handleFCMMessage(this, remoteMessage)) {
+
+    // BEGIN: Enable IU to handle messages targeted for IU
+    // Add the below line on 1st line of the method.
+    if (IUApp.handleFCMMessage(this, remoteMessage)) {
       return;
-      }
-    
-     // END
+    }
+
+    // END
 
     // [START_EXCLUDE]
     // There are two types of messages data messages and notification messages. Data messages are handled
@@ -99,8 +103,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     // and data payloads are treated as notification messages. The Firebase console always sends notification
     // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
     // [END_EXCLUDE]
-    
-    
+
 
     // Pass the message to the receiver manager so any registered receivers can decide to handle it
     boolean wasHandled = FirebasePluginMessageReceiverManager.onMessageReceived(remoteMessage);
@@ -121,7 +124,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     String image = null;
     String bigIcon = null;
     Map<String, String> data = remoteMessage.getData();
-    
+
     if (remoteMessage.getNotification() != null) {
       title = remoteMessage.getNotification().getTitle();
       text = remoteMessage.getNotification().getBody();
@@ -172,9 +175,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       //sendNotification(id, title, text, data, showNotification, sound, lights, image, bigIcon);
       sendNotification(id, title, text, data, true, sound, lights, image, bigIcon);
     }
-  }
+   //}
   }//END onMessageReceived
 
+  @SuppressLint("NotificationTrampoline")
   private void sendNotification(String id, String title, String messageBody, Map<String, String> data, boolean showNotification, String sound, String lights, String imageUri, String bigIconUri) {
     Bundle bundle = new Bundle();
     for (String key : data.keySet()) {
@@ -189,10 +193,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       String channelId = this.getStringResource("default_notification_channel_id");
       String channelName = this.getStringResource("default_notification_channel_name");
       Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-	  
-	  NotificationCompat.BigPictureStyle notificationStylePicture; 
-	  NotificationCompat.BigTextStyle notificationStyleText;
-	  
+    
+    NotificationCompat.BigPictureStyle notificationStylePicture;
+    NotificationCompat.BigTextStyle notificationStyleText;
+    
       NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId);
       notificationBuilder
         .setContentTitle(title)
@@ -202,19 +206,19 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         .setSound(defaultSoundUri)
         .setContentIntent(pendingIntent)
         .setPriority(NotificationCompat.PRIORITY_MAX);
-		
-	  
-	  if (TextUtils.isEmpty(imageUri)) {
-		notificationStyleText = new NotificationCompat.BigTextStyle()
+    
+    
+    if (TextUtils.isEmpty(imageUri)) {
+    notificationStyleText = new NotificationCompat.BigTextStyle()
                 .bigText(messageBody);
-		notificationBuilder.setStyle(notificationStyleText);
+    notificationBuilder.setStyle(notificationStyleText);
       }else{
-		notificationStylePicture = new NotificationCompat.BigPictureStyle();
-		notificationStylePicture.setSummaryText(messageBody);
-		Bitmap bitmapImage = getBitmapfromUrl(imageUri);
-		notificationStylePicture.bigPicture(bitmapImage);
-		notificationBuilder.setStyle(notificationStylePicture);
-	  }
+    notificationStylePicture = new NotificationCompat.BigPictureStyle();
+    notificationStylePicture.setSummaryText(messageBody);
+    Bitmap bitmapImage = getBitmapfromUrl(imageUri);
+    notificationStylePicture.bigPicture(bitmapImage);
+    notificationBuilder.setStyle(notificationStylePicture);
+    }
 
       // Title
       if (TextUtils.isEmpty(title) && android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.M) {
@@ -240,10 +244,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
           notificationBuilder.setSmallIcon(getApplicationInfo().icon);
         }
       }
-	  //Override LargeIcon
-	  if (!TextUtils.isEmpty(bigIconUri)) {
-		notificationBuilder.setLargeIcon(getBitmapfromUrl(bigIconUri));
-	  }
+    //Override LargeIcon
+    if (!TextUtils.isEmpty(bigIconUri)) {
+    notificationBuilder.setLargeIcon(getBitmapfromUrl(bigIconUri));
+    }
 
       // Sound
       if (sound != null) {
@@ -394,7 +398,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     return true;
   }
   
-	public Bitmap getBitmapfromUrl(String imageUrl) {
+  public Bitmap getBitmapfromUrl(String imageUrl) {
         try {
             URL url = new URL(imageUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -405,7 +409,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
             return bitmap;
  
         } catch (Exception e) {
-			Log.e(TAG, e.getLocalizedMessage(), e);
+      Log.e(TAG, e.getLocalizedMessage(), e);
             return null;
  
         }
