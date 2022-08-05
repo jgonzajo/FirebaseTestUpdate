@@ -48,8 +48,11 @@ dependencies {
   implementation 'com.google.firebase:firebase-auth:16.0.5'
   implementation 'com.google.firebase:firebase-core:16.0.9'
 
-  //SDK UI
-  
+  //SDK UI - Material design
+    implementation 'com.google.android.material:material:1.1.0-alpha04'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
   // GSON
   implementation 'com.google.code.gson:gson:2.8.5'
   // Room

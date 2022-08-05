@@ -855,7 +855,7 @@ public class FirebasePlugin extends CordovaPlugin {
   // Remote Configuration
   //
   private void activateFetched(final CallbackContext callbackContext) {
-    cordova.getThreadPool().execute(new Runnable() {
+    /*cordova.getThreadPool().execute(new Runnable() {
       public void run() {
         try {
           final boolean activated = FirebaseRemoteConfig.getInstance().activateFetched();
@@ -865,7 +865,7 @@ public class FirebasePlugin extends CordovaPlugin {
           callbackContext.error(e.getMessage());
         }
       }
-    });
+    });*/
   }
 
   private void fetch(CallbackContext callbackContext) {
@@ -914,7 +914,7 @@ public class FirebasePlugin extends CordovaPlugin {
   }
 
   private void getInfo(final CallbackContext callbackContext) {
-    cordova.getThreadPool().execute(new Runnable() {
+    /*cordova.getThreadPool().execute(new Runnable() {
       public void run() {
         try {
           FirebaseRemoteConfigInfo remoteConfigInfo = FirebaseRemoteConfig.getInstance().getInfo();
@@ -933,11 +933,11 @@ public class FirebasePlugin extends CordovaPlugin {
           callbackContext.error(e.getMessage());
         }
       }
-    });
+    });*/
   }
 
   private void setConfigSettings(final CallbackContext callbackContext, final JSONObject config) {
-    cordova.getThreadPool().execute(new Runnable() {
+    /*cordova.getThreadPool().execute(new Runnable() {
       public void run() {
         try {
           boolean devMode = config.getBoolean("developerModeEnabled");
@@ -950,11 +950,11 @@ public class FirebasePlugin extends CordovaPlugin {
           callbackContext.error(e.getMessage());
         }
       }
-    });
+    });*/
   }
 
   private void setDefaults(final CallbackContext callbackContext, final JSONObject defaults, final String namespace) {
-    cordova.getThreadPool().execute(new Runnable() {
+    /*cordova.getThreadPool().execute(new Runnable() {
       public void run() {
         try {
           if (namespace == null)
@@ -967,7 +967,7 @@ public class FirebasePlugin extends CordovaPlugin {
           callbackContext.error(e.getMessage());
         }
       }
-    });
+    });*/
   }
 
   private static Map<String, Object> defaultsToMap(JSONObject object) throws JSONException {
