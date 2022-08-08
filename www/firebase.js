@@ -212,16 +212,3 @@ exports.SignOut = function (success, error) {
   exec(success, error, PLUGIN_NAME, "signOut", []);
 };
 */
-
-//IU
-exports.launch = function (arg0, success, error) {
-  exec(success, error, PLUGIN_NAME, 'launch', [arg0]);
-};
-
-exports.onRefreshToken = function (arg0, success, error) {
-exec(success, error, PLUGIN_NAME, 'onRefreshToken', [arg0]);
-}
-
-exports.onMessageReceived = function (arg0, success, error) {
-exec(success, error, PLUGIN_NAME, 'onMessageReceived', [arg0]);
-}
