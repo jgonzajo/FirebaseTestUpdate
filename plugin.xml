@@ -34,15 +34,7 @@
     <config-file target="AndroidManifest.xml" parent="/*">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-      <uses-permission android:name="android.permission.CALL_PHONE" />
-      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-      <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-      <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
       <uses-permission android:name="android.permission.WAKE_LOCK" />
-      <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-	    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-      <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     </config-file>
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService" />
@@ -76,16 +68,6 @@
     <resource-file src="google-services.json" target="./google-services.json" />
     <resource-file src="src/android/cordova-plugin-firebase-strings.xml" target="res/values/cordova-plugin-firebase-strings.xml" />
     <resource-file src="src/android/cordova-plugin-firebase-colors.xml" target="res/values/cordova-plugin-firebase-colors.xml" />
-    
-    <!--Resources for IU SDK-->
-
-    <resource-file src="src/android/drconfig.json" target="assets/drconfig.json" />
-    <resource-file src="iu-proguard.txt" target="iu-proguard.txt"/>
-    <resource-file src="src/android/config/iuconfig_v7.json" target="assets/iuconfig_v7.json" />
-    <resource-file src="src/android/libs/amlibrary-prod-release.aar" target="libs/amlibrary-prod-release.aar" />
-
-    <resource-file src="src/android/libs/idmanager-prod-release.aar" target="libs/idmanager-prod-release.aar" />
-
 
     <source-file src="src/android/FirebasePlugin.java" target-dir="src/org/apache/cordova/firebase" />
     <source-file src="src/android/OnNotificationOpenReceiver.java" target-dir="src/org/apache/cordova/firebase" />

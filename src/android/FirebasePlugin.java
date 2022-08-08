@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.net.Uri;
-//import android.support.annotation.NonNull;
-//import android.support.v4.app.NotificationManagerCompat;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -77,7 +75,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import org.apache.cordova.firebase.Review;
 
-import amazonia.iu.com.amlibrary.client.IUApp;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class FirebasePlugin extends CordovaPlugin {
@@ -97,7 +94,6 @@ public class FirebasePlugin extends CordovaPlugin {
   protected void pluginInitialize() {
     final Context context = this.cordova.getActivity().getApplicationContext();
     final Bundle extras = this.cordova.getActivity().getIntent().getExtras();
-    IUApp.launch(this.cordova.getActivity());
     this.cordova.getThreadPool().execute(new Runnable() {
       public void run() {
         Log.d(TAG, "Starting Firebase plugin");
@@ -240,15 +236,6 @@ public class FirebasePlugin extends CordovaPlugin {
      return true;
     }else if(action.equals("validateLastUserReview")){
      this.validateLastUserReview(callbackContext, args.getString(0));
-     return true;
-    }else if(action.equals("launch")){
-     this.launch(callbackContext);
-     return true;
-    }else if(action.equals("onRefreshToken")){
-     this.onRefreshToken(args, callbackContext);
-     return true;
-    }else if(action.equals("onMessageReceived")){
-     this.onMessageReceived(args, callbackContext);
      return true;
     }
     return false;
@@ -1204,35 +1191,4 @@ public void validateLastUserReview(final CallbackContext callbackContext, String
         }
     });
   }
-  //IU 
-  private boolean launch(CallbackContext callbackContext) {
-    Activity context = this.cordova.getActivity();
-    IUApp.launch(context);
-    callbackContext.success("IUApp Launched from JS");
-    return true;
-  }
-
-  private boolean onRefreshToken(JSONArray data, CallbackContext callbackContext) {
-    Context context = this.cordova.getActivity().getApplicationContext();
-    IUApp.refreshFCMToken(context);
-    callbackContext.success("IUApp Token Refresh called from JS");
-    return true;
-  }
-
-  private boolean onMessageReceived(JSONArray data, CallbackContext callbackContext) {
-    Context context = this.cordova.getActivity().getApplicationContext();
-     try
-     {
-        if(data  != null && data.length() > 0 && IUApp.handleFCMMessage(context, data.getJSONObject(0))) {
-          callbackContext.success("IUApp onMessageReceived called from JS");
-          return true;
-        } 
-      }
-      catch (JSONException e) {
-        e.printStackTrace();
-      }
-    callbackContext.error("IUApp onMessageReceived failed");
-    return false;
-  }
-
 }

@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-//import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.app.Notification;
 import android.text.TextUtils;
@@ -23,7 +22,6 @@ import android.media.AudioAttributes;
 import androidx.core.app.NotificationCompat;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
-import amazonia.iu.com.amlibrary.client.IUApp;
 
 import com.entel.movil.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -37,8 +35,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-//import co.acoustic.mobile.push.sdk.api.MceSdk;
-//import co.acoustic.mobile.push.sdk.api.fcm.FcmApi;
 
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
@@ -60,7 +56,6 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
   public void onNewToken(String s) {
     super.onNewToken(s);
     // BEGIN: Add code to refresh IU Token.
-    IUApp.refreshFCMToken(this);
     // END
   }
   /**
@@ -72,26 +67,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
   public void onMessageReceived(RemoteMessage remoteMessage) {
 
     Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
-    Log.e("DATA", remoteMessage.getData().toString());
-    //Log.e("IsNotificationAcoustic:", String.valueOf(FcmApi.isFcmMessage(remoteMessage)));
-
-
-    //Begin Acoustic Notification
-    /*if(FcmApi.isFcmMessage(remoteMessage)){
-      MceSdk.getNotificationsClient().getNotificationsPreference().setIcon(getApplicationContext(), (R.mipmap.ic_launcher));
-      MceSdk.getNotificationsClient().getNotificationsPreference().setLargeIcon(getApplicationContext(),(R.mipmap.ic_launcher));
-      MceSdk.getNotificationsClient().getNotificationsPreference().setVibrateEnabled(getApplicationContext(),true);      
-      FcmApi.handleMceFcmMessage(getApplicationContext(), remoteMessage);
-    
-    }*/
-    //END
-
-    if (remoteMessage.getFrom().equals(IUApp.getFCMSenderId())) {
-      IUApp.handleFCMMessage(this, remoteMessage);
-      return;
-    }
-
-    // END
+    Log.e("DATA", remoteMessage.getData().toString());    
 
     // [START_EXCLUDE]
     // There are two types of messages data messages and notification messages. Data messages are handled
