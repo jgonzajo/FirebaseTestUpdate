@@ -73,8 +73,8 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }*/
   // IU AAR File
-  implementation(name: 'amlibrary-prod-release', ext: 'aar')
-  implementation(name: 'idmanager-prod-release', ext: 'aar')
+  //implementation(name: 'amlibrary-prod-release', ext: 'aar')
+  //implementation(name: 'idmanager-prod-release', ext: 'aar')
 
   // Other
   implementation 'com.google.code.findbugs:jsr305:3.0.2'

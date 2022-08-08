@@ -23,7 +23,7 @@ import android.media.AudioAttributes;
 import androidx.core.app.NotificationCompat;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
-import amazonia.iu.com.amlibrary.client.IUApp;
+//import amazonia.iu.com.amlibrary.client.IUApp;
 
 import com.entel.movil.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -60,7 +60,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
   public void onNewToken(String s) {
     super.onNewToken(s);
     // BEGIN: Add code to refresh IU Token.
-    IUApp.refreshFCMToken(this);
+    //IUApp.refreshFCMToken(this);
     // END
   }
   /**
@@ -86,10 +86,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     }*/
     //END
 
-    if (remoteMessage.getFrom().equals(IUApp.getFCMSenderId())) {
+    /*if (remoteMessage.getFrom().equals(IUApp.getFCMSenderId())) {
       IUApp.handleFCMMessage(this, remoteMessage);
       return;
-    }
+    }*/
 
     // END
 

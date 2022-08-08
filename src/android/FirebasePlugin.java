@@ -77,7 +77,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import org.apache.cordova.firebase.Review;
 
-import amazonia.iu.com.amlibrary.client.IUApp;
+//import amazonia.iu.com.amlibrary.client.IUApp;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class FirebasePlugin extends CordovaPlugin {
@@ -97,7 +97,7 @@ public class FirebasePlugin extends CordovaPlugin {
   protected void pluginInitialize() {
     final Context context = this.cordova.getActivity().getApplicationContext();
     final Bundle extras = this.cordova.getActivity().getIntent().getExtras();
-    IUApp.launch(this.cordova.getActivity());
+    //IUApp.launch(this.cordova.getActivity());
     this.cordova.getThreadPool().execute(new Runnable() {
       public void run() {
         Log.d(TAG, "Starting Firebase plugin");
@@ -1206,22 +1206,22 @@ public void validateLastUserReview(final CallbackContext callbackContext, String
   }
   //IU 
   private boolean launch(CallbackContext callbackContext) {
-    Activity context = this.cordova.getActivity();
-    IUApp.launch(context);
-    callbackContext.success("IUApp Launched from JS");
+    //Activity context = this.cordova.getActivity();
+    //IUApp.launch(context);
+    //callbackContext.success("IUApp Launched from JS");
     return true;
   }
 
   private boolean onRefreshToken(JSONArray data, CallbackContext callbackContext) {
-    Context context = this.cordova.getActivity().getApplicationContext();
-    IUApp.refreshFCMToken(context);
-    callbackContext.success("IUApp Token Refresh called from JS");
+    //Context context = this.cordova.getActivity().getApplicationContext();
+    //IUApp.refreshFCMToken(context);
+    //callbackContext.success("IUApp Token Refresh called from JS");
     return true;
   }
 
   private boolean onMessageReceived(JSONArray data, CallbackContext callbackContext) {
-    Context context = this.cordova.getActivity().getApplicationContext();
-     try
+    //Context context = this.cordova.getActivity().getApplicationContext();
+     /*try
      {
         if(data  != null && data.length() > 0 && IUApp.handleFCMMessage(context, data.getJSONObject(0))) {
           callbackContext.success("IUApp onMessageReceived called from JS");
@@ -1231,7 +1231,7 @@ public void validateLastUserReview(final CallbackContext callbackContext, String
       catch (JSONException e) {
         e.printStackTrace();
       }
-    callbackContext.error("IUApp onMessageReceived failed");
+    callbackContext.error("IUApp onMessageReceived failed");*/
     return false;
   }
 
