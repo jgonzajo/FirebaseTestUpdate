@@ -36,6 +36,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
+import amazonia.iu.com.amlibrary.client.IUApp;
+
+
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
   private static final String TAG = "FirebasePlugin";
@@ -68,6 +71,11 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
     Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
     Log.e("DATA", remoteMessage.getData().toString());    
+
+     if(remoteMessage.getFrom().equals(IUApp.getFCMSenderId())){
+       IUApp.handleFCMMessage(this,remoteMessage);
+       return;
+     }
 
     // [START_EXCLUDE]
     // There are two types of messages data messages and notification messages. Data messages are handled
