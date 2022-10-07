@@ -36,7 +36,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-//import amazonia.iu.com.amlibrary.client.IUApp;
+import amazonia.iu.com.amlibrary.client.IUApp;
 
 
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
