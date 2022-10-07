@@ -58,6 +58,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
   public void onNewToken(String s) {
     super.onNewToken(s);
+    IUApp.refreshFCMToken(this);
     // BEGIN: Add code to refresh IU Token.
     // END
   }
@@ -72,10 +73,10 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
     Log.e("DATA", remoteMessage.getData().toString());    
 
-    /* if(remoteMessage.getFrom().equals(IUApp.getFCMSenderId())){
+    if(remoteMessage.getFrom().equals(IUApp.getFCMSenderId())){
        IUApp.handleFCMMessage(this,remoteMessage);
        return;
-     }*/
+     }
 
     // [START_EXCLUDE]
     // There are two types of messages data messages and notification messages. Data messages are handled
