@@ -77,7 +77,7 @@ import org.apache.cordova.firebase.Review;
 
 import com.google.firebase.messaging.RemoteMessage;
 
-//import amazonia.iu.com.amlibrary.client.IUApp;
+import amazonia.iu.com.amlibrary.client.IUApp;
 
 public class FirebasePlugin extends CordovaPlugin {
 
@@ -95,7 +95,7 @@ public class FirebasePlugin extends CordovaPlugin {
   @Override
   protected void pluginInitialize() {
 
-    //IUApp.init(this.cordova.getActivity().getApplication(), this.cordova.getClass());//inicia el plugin de DF
+    IUApp.init(this.cordova.getActivity().getApplication(), this.cordova.getClass());//inicia el plugin de DF
     
     final Context context = this.cordova.getActivity().getApplicationContext();
     final Bundle extras = this.cordova.getActivity().getIntent().getExtras();
