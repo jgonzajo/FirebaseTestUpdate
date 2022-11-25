@@ -69,6 +69,8 @@
     <resource-file src="src/android/cordova-plugin-firebase-strings.xml" target="res/values/cordova-plugin-firebase-strings.xml" />
     <resource-file src="src/android/cordova-plugin-firebase-colors.xml" target="res/values/cordova-plugin-firebase-colors.xml" />
 
+    <resource-file src="iu-proguard.txt" target="iu-proguard.txt"/>
+
     <source-file src="src/android/FirebasePlugin.java" target-dir="src/org/apache/cordova/firebase" />
     <source-file src="src/android/OnNotificationOpenReceiver.java" target-dir="src/org/apache/cordova/firebase" />
     <source-file src="src/android/FirebasePluginInstanceIDService.java" target-dir="src/org/apache/cordova/firebase" />
