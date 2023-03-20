@@ -77,7 +77,7 @@ import org.apache.cordova.firebase.Review;
 
 import com.google.firebase.messaging.RemoteMessage;
 
-//import amazonia.iu.com.amlibrary.client.;
+//import amazonia.iu.com.amlibrary.client.IUApp;
 
 public class FirebasePlugin extends CordovaPlugin {
 
